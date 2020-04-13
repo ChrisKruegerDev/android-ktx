@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: "de.mannodermaus.android-junit5"
 
 def config = rootProject.ext
 
@@ -39,9 +40,12 @@ android {
     }
 
     testOptions {
-        unitTests {
-            returnDefaultValues = true
-            includeAndroidResources = true
+        unitTests.all {
+            useJUnitPlatform()
+            testLogging {
+                events "passed", "skipped", "failed", "standardOut", "standardError"
+                showStandardStreams = true
+            }
         }
     }
 
@@ -72,6 +76,16 @@ dependencies {
     // kotlin
     implementation dependencies.kotlin
     implementation dependencies.kotlinReflect
+
+    // androidx
+    implementation dependencies.preference
+    implementation dependencies.preferenceKtx
+
+    // testing
+    testImplementation dependencies.truth
+    testImplementation dependencies.jupiter
+    testRuntimeOnly dependencies.jupiterEngine
+    testImplementation dependencies.mockito
 }
 
 tasks.withType(Javadoc).all {
