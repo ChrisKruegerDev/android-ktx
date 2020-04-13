@@ -39,7 +39,7 @@ apply from: 'dependencies.gradle'
 
 def versionMajor = 1
 def versionMinor = 0
-def versionPatch = 0
+def versionPatch = 1
 
 ext {
     versionName = "$versionMajor.$versionMinor.$versionPatch"
