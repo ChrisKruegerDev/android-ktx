@@ -14,6 +14,7 @@ ext {
             coreKtx            : "androidx.core:core-ktx:1.1.0",
             preference         : "androidx.preference:preference:$preferenceVersion",
             preferenceKtx      : "androidx.preference:preference-ktx:$preferenceVersion",
+            work               : "androidx.work:work-runtime-ktx:2.4.0-alpha02",
 
             // testing
             truth              : "com.google.truth:truth:1.0.1",

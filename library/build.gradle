@@ -78,8 +78,10 @@ dependencies {
     implementation dependencies.kotlinReflect
 
     // androidx
+    implementation dependencies.coreKtx
     implementation dependencies.preference
     implementation dependencies.preferenceKtx
+    implementation dependencies.work
 
     // testing
     testImplementation dependencies.truth
