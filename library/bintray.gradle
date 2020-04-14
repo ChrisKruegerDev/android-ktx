@@ -5,13 +5,16 @@ def config = rootProject.ext
 version config.versionName
 
 task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.sourceFiles
+    from android.sourceSets.main.java.srcDirs
     archiveClassifier.set('sources')
 }
 
 task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.sourceFiles
+    options.charSet = 'UTF-8'
+    failOnError  false
+    source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.compile
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {

@@ -1,4 +1,4 @@
-package com.moviebase.ktx.work
+package com.placebox.ktx.work
 
 import androidx.work.Data
 
