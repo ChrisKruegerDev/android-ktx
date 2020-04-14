@@ -1,6 +1,7 @@
 ext {
     junitJupiterVersion = '5.6.2'
     preferenceVersion = '1.1.0'
+    navigationVersion = '2.2.1'
 
     dependencies = [
             // kotlin
@@ -15,6 +16,10 @@ ext {
             preference         : "androidx.preference:preference:$preferenceVersion",
             preferenceKtx      : "androidx.preference:preference-ktx:$preferenceVersion",
             work               : "androidx.work:work-runtime-ktx:2.4.0-alpha02",
+            navigationUi       : "androidx.navigation:navigation-ui:$navigationVersion",
+
+            // android support
+            material           : "com.google.android.material:material:1.2.0-alpha05",
 
             // testing
             truth              : "com.google.truth:truth:1.0.1",

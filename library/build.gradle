@@ -82,6 +82,12 @@ dependencies {
     implementation dependencies.preference
     implementation dependencies.preferenceKtx
     implementation dependencies.work
+    implementation dependencies.recyclerView
+    implementation dependencies.contraintLayout
+    implementation dependencies.navigationUi
+
+    // android support
+    implementation dependencies.material
 
     // testing
     testImplementation dependencies.truth

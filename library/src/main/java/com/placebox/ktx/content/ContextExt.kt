@@ -10,6 +10,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.os.IBinder
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.*
 import androidx.core.content.ContextCompat
@@ -87,3 +88,4 @@ val Context.lastUpdateTime: Long?
 val Context.isInstallFromUpdate: Boolean
     get() = firstInstallTime != lastUpdateTime
 
+fun Context.hideKeyboard(windowToken: IBinder) = inputManager.hideSoftInputFromWindow(windowToken, 0)

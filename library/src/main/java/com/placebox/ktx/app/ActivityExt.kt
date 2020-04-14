@@ -3,10 +3,14 @@ package com.placebox.ktx.app
 import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.DrawableRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.app.ShareCompat
+import com.placebox.ktx.content.preferences
 import kotlin.reflect.KClass
 
 fun Activity.startActivityWithFade(intent: Intent) {
@@ -29,13 +33,27 @@ val Activity.view: View? get() = findViewById(android.R.id.content)
 
 fun Activity.startShareChooser(uri: String, title: String?) {
     ShareCompat.IntentBuilder.from(this)
-        .setText(uri)
-        .setSubject(title)
-        .setType("text/plain")
-        .startChooser()
+            .setText(uri)
+            .setSubject(title)
+            .setType("text/plain")
+            .startChooser()
 }
 
 fun Activity.startChooser(intent: Intent, title: String?) {
     val chooser = Intent.createChooser(intent, title)
     startActivity(chooser)
 }
+
+fun Activity.registerOnSharedPreferenceChangeListener(l: SharedPreferences.OnSharedPreferenceChangeListener) {
+    preferences.registerOnSharedPreferenceChangeListener(l)
+}
+
+fun Activity.unregisterOnSharedPreferenceChangeListener(l: SharedPreferences.OnSharedPreferenceChangeListener) {
+    preferences.unregisterOnSharedPreferenceChangeListener(l)
+}
+
+fun AppCompatActivity.setToolbarIcon(@DrawableRes resId: Int) =
+        supportActionBar?.let {
+            it.setHomeAsUpIndicator(resId)
+            it.setDisplayHomeAsUpEnabled(true)
+        }
