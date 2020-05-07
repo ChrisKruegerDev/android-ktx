@@ -50,3 +50,7 @@ suspend fun <T> awaitRetry(
     // last attempt to execute block
     return block()
 }
+
+fun exceptionHandler(block: (Throwable) -> Unit) = CoroutineExceptionHandler { _, throwable ->
+    block(throwable)
+}

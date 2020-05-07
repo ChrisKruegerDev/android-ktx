@@ -85,6 +85,7 @@ dependencies {
     implementation dependencies.recyclerView
     implementation dependencies.contraintLayout
     implementation dependencies.navigationUi
+    implementation dependencies.viewPager2
 
     // android support
     implementation dependencies.material

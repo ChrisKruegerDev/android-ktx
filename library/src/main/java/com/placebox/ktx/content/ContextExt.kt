@@ -10,12 +10,13 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.IBinder
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.*
 import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
-import java.util.NoSuchElementException
+import java.util.*
 
 val Context.alarmManager get() = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 val Context.notificationManager get() = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -38,6 +39,12 @@ val Context.isOnline: Boolean
                 || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
     }
 
+@Suppress("DEPRECATION")
+val Context.locale: Locale
+    get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+        resources.configuration.locales.get(0)
+    else
+        resources.configuration.locale
 
 fun Context.dimensionPixelSize(@DimenRes id: Int) = resources.getDimensionPixelSize(id)
 fun Context.dimension(@DimenRes id: Int) = resources.getDimension(id)
@@ -89,3 +96,6 @@ val Context.isInstallFromUpdate: Boolean
     get() = firstInstallTime != lastUpdateTime
 
 fun Context.hideKeyboard(windowToken: IBinder) = inputManager.hideSoftInputFromWindow(windowToken, 0)
+
+fun Context.hasPermission(permission: String) =
+    ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED

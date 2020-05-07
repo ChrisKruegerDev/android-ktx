@@ -1,6 +1,9 @@
 package com.placebox.ktx.view
 
 import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 fun ViewPager.onPageSelected(callback: (Int) -> Unit) {
     addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -19,4 +22,22 @@ fun ViewPager.onPageSelected(callback: (Int) -> Unit) {
 fun ViewPager.updateCurrentItem(position: Int) {
     if (currentItem != position)
         currentItem = position
+}
+
+
+fun TabLayout.setupViewPager2(viewPager: ViewPager2, nameArrayRes: Int) {
+    val names = resources.getStringArray(nameArrayRes)
+    setupViewPager2(viewPager, names)
+}
+
+fun TabLayout.setupViewPager2(viewPager: ViewPager2, names: Array<String>) {
+    TabLayoutMediator(this, viewPager) { tab, position -> tab.text = names[position] }.attach()
+}
+
+fun ViewPager2.onPageSelected(callback: (Int) -> Unit) {
+    registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            callback(position)
+        }
+    })
 }
