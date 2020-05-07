@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
@@ -27,6 +28,7 @@ val Context.searchManager get() = getSystemService(Context.SEARCH_SERVICE) as Se
 val Context.inputManager get() = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 val Context.connectivityManager get() = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 val Context.activityManager get() = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+val Context.locationManager get() = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
 val Context.appWidgetManager: AppWidgetManager get() = AppWidgetManager.getInstance(this)
 val Context.preferences: SharedPreferences get() = PreferenceManager.getDefaultSharedPreferences(this)

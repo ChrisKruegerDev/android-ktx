@@ -20,7 +20,7 @@ inline fun <T> Iterable<T>.firstIndex(predicate: (T) -> Boolean): Int {
 
 fun <K, V> Map<K, V>.switch(): Map<V, K> = entries.associateBy({ it.value }) { it.key }
 
-fun <K, V> MutableMap<K, V>.computeWhenAbsent(key: K, mapping: (K) -> V): V {
+inline fun <K, V> MutableMap<K, V>.computeWhenAbsent(key: K, mapping: (K) -> V): V {
     val value = this[key]
 
     if (value == null) {
