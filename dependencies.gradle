@@ -11,16 +11,16 @@ ext {
             // androidx
             appCompat          : "androidx.appcompat:appcompat:1.1.0",
             recyclerView       : "androidx.recyclerview:recyclerview:1.1.0",
-            contraintLayout    : "androidx.constraintlayout:constraintlayout:2.0.0-beta4",
-            coreKtx            : "androidx.core:core-ktx:1.1.0",
+            contraintLayout    : "androidx.constraintlayout:constraintlayout:2.0.0-beta6",
+            coreKtx            : "androidx.core:core-ktx:1.3.0",
             preference         : "androidx.preference:preference:$preferenceVersion",
             preferenceKtx      : "androidx.preference:preference-ktx:$preferenceVersion",
-            work               : "androidx.work:work-runtime-ktx:2.4.0-alpha02",
+            work               : "androidx.work:work-runtime-ktx:2.4.0-beta01",
             navigationUi       : "androidx.navigation:navigation-ui:$navigationVersion",
             viewPager2         : "androidx.viewpager2:viewpager2:1.0.0",
 
             // android support
-            material           : "com.google.android.material:material:1.2.0-alpha06",
+            material           : "com.google.android.material:material:1.2.0-beta01",
 
             // testing
             truth              : "com.google.truth:truth:1.0.1",
