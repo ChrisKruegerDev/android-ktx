@@ -19,18 +19,17 @@ fun <T> MutableLiveData<T>.updateValue(newValue: T) {
     if (value != newValue) value = newValue
 }
 
-fun <T> LiveData<T>.bind(owner: LifecycleOwner, onChange: (T?) -> Unit) {
+fun <T> LiveData<T>.bind(owner: LifecycleOwner, onChange: (T) -> Unit) {
     val lifecycleOwner = if (owner is Fragment) owner.viewLifecycleOwner else owner
     observe(lifecycleOwner, Observer { onChange(it) })
 }
 
 fun <T> LiveData<T>.bindNotNull(owner: LifecycleOwner, onChange: (T) -> Unit) =
-    observe(owner, Observer { if (it != null) onChange(it) })
+    bind(owner) { if (it != null) onChange(it) }
 
-fun <T : Any?> LiveData<T>.bindNullableAsSelected(owner: LifecycleOwner, view: View) {
-    observe(owner, Observer { view.isSelected = it != null })
-}
+fun <T : Any?> LiveData<T>.bindNullableAsSelected(owner: LifecycleOwner, view: View) =
+    bind(owner) { view.isSelected = it != null }
 
-fun <T : Any?> LiveData<T>.bindNullableAsVisible(owner: LifecycleOwner, view: View) {
-    observe(owner, Observer { view.isVisible = it != null })
-}
+fun <T : Any?> LiveData<T>.bindNullableAsVisible(owner: LifecycleOwner, view: View) =
+    bind(owner) { view.isVisible = it != null }
+
