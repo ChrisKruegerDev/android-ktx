@@ -19,4 +19,6 @@ fun SharedPreferences.setNullableBoolean(key: String, value: Boolean?) = edit {
 
 fun SharedPreferences.getNullableBoolean(key: String): Boolean? = if (contains(key)) getBoolean(key, false) else null
 
+fun SharedPreferences.getNotNullString(key: String, defaultValue: String): String = getString(key, defaultValue) ?: defaultValue
+
 fun SharedPreferences.removeValue(key: String) = edit { remove(key) }
