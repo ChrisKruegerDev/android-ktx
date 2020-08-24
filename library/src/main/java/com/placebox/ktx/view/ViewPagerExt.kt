@@ -30,7 +30,7 @@ fun TabLayout.setupViewPager2(viewPager: ViewPager2, nameArrayRes: Int) {
     setupViewPager2(viewPager, names)
 }
 
-fun TabLayout.setupViewPager2(viewPager: ViewPager2, names: Array<String>?) {
+fun TabLayout.setupViewPager2(viewPager: ViewPager2, names: Array<String>? = null) {
     TabLayoutMediator(this, viewPager) { tab, position ->
         if(names != null) tab.text = names[position]
     }.attach()

@@ -2,6 +2,7 @@ package com.placebox.ktx.app
 
 import android.app.Activity
 import android.app.ActivityOptions
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -31,18 +32,34 @@ fun Activity.makeSceneTransitionAnimation(view: View): Bundle? {
 
 val Activity.view: View? get() = findViewById(android.R.id.content)
 
-fun Activity.startShareChooser(uri: String, title: String?) {
+fun Activity.shareIntentChooser(uri: String, title: String?): Boolean = try {
     ShareCompat.IntentBuilder.from(this)
-            .setText(uri)
-            .setSubject(title)
-            .setType("text/plain")
-            .startChooser()
+        .setText(uri)
+        .setSubject(title)
+        .setType("text/plain")
+        .startChooser()
+    true
+} catch (e: ActivityNotFoundException) {
+    false
 }
 
-fun Activity.startChooser(intent: Intent, title: String?) {
+
+fun Activity.startShareChooser(uri: String, title: String?) {
+    ShareCompat.IntentBuilder.from(this)
+        .setText(uri)
+        .setSubject(title)
+        .setType("text/plain")
+        .startChooser()
+}
+
+fun Activity.startChooser(intent: Intent, title: String?) = try {
     val chooser = Intent.createChooser(intent, title)
     startActivity(chooser)
+    true
+} catch (e: Throwable) {
+    false
 }
+
 
 fun Activity.registerOnSharedPreferenceChangeListener(l: SharedPreferences.OnSharedPreferenceChangeListener) {
     preferences.registerOnSharedPreferenceChangeListener(l)
