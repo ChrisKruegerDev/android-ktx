@@ -8,8 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 
-val <T> LiveData<T?>.requireValue: T
-    get() = value ?: throw NullPointerException("value is not available")
+fun <T> LiveData<T?>.requireValue(): T = value ?: throw NullPointerException("value is not available")
 
 fun <T> MutableLiveData<T>.trigger() {
     value = value

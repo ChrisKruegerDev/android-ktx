@@ -3,6 +3,7 @@ package com.placebox.ktx.widget
 import android.view.ViewGroup
 import androidx.annotation.ArrayRes
 import androidx.annotation.DimenRes
+import androidx.core.view.postDelayed
 import com.google.android.material.tabs.TabLayout
 
 fun TabLayout.addNewTab(title: String, tag: Any? = null) {
@@ -20,13 +21,23 @@ fun TabLayout.addTabs(tabs: Iterable<String>) = tabs.forEach { addNewTab(it) }
 
 fun TabLayout.selectByPosition(position: Int) = getTabAt(position)?.select()
 
+fun TabLayout.selectNext() {
+    val position = selectedTabPosition + 1
+    selectByPosition(position)
+}
+
+fun TabLayout.selectPrevious() {
+    val position = selectedTabPosition -1
+    selectByPosition(position)
+}
+
 fun TabLayout.selectTabByTag(tagId: Any?): Boolean {
     if (tagId == null) return false
 
     for (i in 0 until tabCount) {
         val tab = getTabAt(i)
-        if (tab != null && tab.tag === tagId) {
-            tab.select()
+        if (tab != null && tab.tag == tagId) {
+            if(!tab.isSelected) postDelayed(100) { tab.select() }
             return true
         }
     }

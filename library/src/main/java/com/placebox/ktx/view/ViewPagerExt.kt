@@ -30,8 +30,10 @@ fun TabLayout.setupViewPager2(viewPager: ViewPager2, nameArrayRes: Int) {
     setupViewPager2(viewPager, names)
 }
 
-fun TabLayout.setupViewPager2(viewPager: ViewPager2, names: Array<String>) {
-    TabLayoutMediator(this, viewPager) { tab, position -> tab.text = names[position] }.attach()
+fun TabLayout.setupViewPager2(viewPager: ViewPager2, names: Array<String>?) {
+    TabLayoutMediator(this, viewPager) { tab, position ->
+        if(names != null) tab.text = names[position]
+    }.attach()
 }
 
 fun ViewPager2.onPageSelected(callback: (Int) -> Unit) {
