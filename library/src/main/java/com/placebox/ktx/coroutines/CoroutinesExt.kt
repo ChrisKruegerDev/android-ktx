@@ -4,10 +4,10 @@ import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
-private const val INITIAL_DELAY = 500L
-private const val MAX_DELAY = 1000L
-private const val FACTOR = 2
-private const val DEFAULT_TIMES = 3
+const val INITIAL_DELAY = 500L
+const val MAX_DELAY = 1000L
+const val FACTOR = 2
+const val DEFAULT_TIMES = 3
 
 suspend fun <T> scopeAsync(
     context: CoroutineContext = EmptyCoroutineContext,
@@ -17,8 +17,6 @@ suspend fun <T> scopeAsync(
 suspend fun scopeLaunch(
     block: suspend CoroutineScope.() -> Unit
 ) = coroutineScope { launch(block = block) }
-
-fun <T> T.asDeferred() = CompletableDeferred(this)
 
 suspend fun <T> Deferred<T?>.awaitOrNull(): T? = try {
     await()
