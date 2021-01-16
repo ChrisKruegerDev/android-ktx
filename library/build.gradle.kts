@@ -70,10 +70,16 @@ android {
         isIgnoreTestSources = true
         isWarningsAsErrors = true
         isCheckDependencies = true
+        isAbortOnError = false
     }
     packagingOptions {
         exclude("META-INF/*.kotlin_module")
     }
+}
+
+val sourcesJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("sources")
+    from(android.sourceSets.getByName("main").java.srcDirs)
 }
 
 publishing {
@@ -97,7 +103,7 @@ publishing {
             groupId = project.group.toString()
             artifactId = "android-ktx"
             version = "$version_major.$version_minor.$version_patch"
-            from(components["java"])
+            artifact(sourcesJar)
 
             pom {
                 name.set(project.name)

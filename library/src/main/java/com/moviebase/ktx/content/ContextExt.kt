@@ -16,6 +16,7 @@ import android.os.IBinder
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.*
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.preference.PreferenceManager
 import java.util.*
 
@@ -51,7 +52,7 @@ val Context.locale: Locale
 fun Context.dimensionPixelSize(@DimenRes id: Int) = resources.getDimensionPixelSize(id)
 fun Context.dimension(@DimenRes id: Int) = resources.getDimension(id)
 fun Context.integer(@IntegerRes id: Int) = resources.getInteger(id)
-fun Context.drawable(id: Int) = resources.getDrawable(id, theme)
+fun Context.drawable(id: Int) = ResourcesCompat.getDrawable(resources, id, theme)
 fun Context.color(@ColorRes id: Int) = ContextCompat.getColor(this, id)
 
 @ColorInt
