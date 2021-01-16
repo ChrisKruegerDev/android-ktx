@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("android")
     id("de.mannodermaus.android-junit5")
     id("maven-publish")
@@ -16,6 +16,9 @@ val version_major: String by project
 val version_minor: String by project
 val version_patch: String by project
 val kotlin_version: String by project
+
+group = "com.moviebase"
+version = "$version_major.$version_minor.$version_patch"
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
@@ -38,7 +41,6 @@ android {
     compileSdkVersion(30)
     buildToolsVersion = "30.0.2"
     defaultConfig {
-        applicationId = "com.moviebase"
         minSdkVersion(23)
         targetSdkVersion(30)
         versionCode = version_major.toInt() * 1000 + version_minor.toInt() * 100 + version_patch.toInt() * 10
@@ -46,7 +48,7 @@ android {
     }
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -72,14 +74,15 @@ android {
         isCheckDependencies = true
         isAbortOnError = false
     }
-    packagingOptions {
-        exclude("META-INF/*.kotlin_module")
-    }
 }
 
 val sourcesJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("sources")
+//    archiveClassifier.set("sources")
     from(android.sourceSets.getByName("main").java.srcDirs)
+}
+
+artifacts {
+    add("archives", sourcesJar)
 }
 
 publishing {
@@ -100,17 +103,18 @@ publishing {
 
     publications {
         create<MavenPublication>("mavenJava") {
-            groupId = project.group.toString()
+            groupId = "com.moviebase"
             artifactId = "android-ktx"
             version = "$version_major.$version_minor.$version_patch"
             artifact(sourcesJar)
+            artifact("$buildDir/outputs/aar/library-release.aar")
 
             pom {
-                name.set(project.name)
+                name.set("Android Kotlin Extensions")
                 description.set("Kotlin extensions for Android.")
                 url.set("https://github.com/MoviebaseApp/${project.name}")
                 inceptionYear.set("2020")
-                packaging = "jar"
+                packaging = "aar"
 
                 developers {
                     developer {
@@ -136,5 +140,13 @@ publishing {
                 }
             }
         }
+    }
+}
+
+tasks.withType<Test>().configureEach {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+        showStandardStreams = true
     }
 }

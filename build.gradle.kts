@@ -14,13 +14,6 @@ buildscript {
     }
 }
 
-val version_major: String by extra
-val version_minor: String by extra
-val version_patch: String by extra
-
-group = "com.moviebase"
-version = "$version_major.$version_minor.$version_patch"
-
 allprojects {
     repositories {
         maven("${System.getenv("HOME")}/.m2/repository")
