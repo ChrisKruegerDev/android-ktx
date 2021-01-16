@@ -46,12 +46,6 @@ android {
         versionCode = version_major.toInt() * 1000 + version_minor.toInt() * 100 + version_patch.toInt() * 10
         versionName = "$version_major.$version_minor.$version_patch"
     }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -77,6 +71,7 @@ android {
 }
 
 val sourcesJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("sources")
     from(android.sourceSets.getByName("main").java.srcDirs)
 }
 
@@ -84,57 +79,59 @@ artifacts {
     add("archives", sourcesJar)
 }
 
-publishing {
-    //    https://github.com/gradle/gradle/issues/11412#issuecomment-555413327
-    System.setProperty("org.gradle.internal.publish.checksums.insecure", "true")
+afterEvaluate {
+    publishing {
+        //    https://github.com/gradle/gradle/issues/11412#issuecomment-555413327
+        System.setProperty("org.gradle.internal.publish.checksums.insecure", "true")
 
-    repositories {
-        maven {
-            name = "bintray"
-            setUrl("https://api.bintray.com/maven/moviebase/maven/android-ktx/;publish=1;override=1")
+        repositories {
+            maven {
+                name = "bintray"
+                setUrl("https://api.bintray.com/maven/moviebase/maven/android-ktx/;publish=1;override=1")
 
-            credentials {
-                username = findProperty("BINTRAY_USER") as String?
-                password = findProperty("BINTRAY_API_KEY") as String?
+                credentials {
+                    username = findProperty("BINTRAY_USER") as String?
+                    password = findProperty("BINTRAY_API_KEY") as String?
+                }
             }
         }
-    }
 
-    publications {
-        create<MavenPublication>("mavenJava") {
-            groupId = "com.moviebase"
-            artifactId = "android-ktx"
-            version = "$version_major.$version_minor.$version_patch"
-            artifact(sourcesJar)
+        publications {
+            create<MavenPublication>("mavenJava") {
+                groupId = "com.moviebase"
+                artifactId = "android-ktx"
+                version = "$version_major.$version_minor.$version_patch"
+                artifact(sourcesJar)
+                from(components.getByName("release"))
 
-            pom {
-                name.set("Android Kotlin Extensions")
-                description.set("Kotlin extensions for Android.")
-                url.set("https://github.com/MoviebaseApp/${project.name}")
-                inceptionYear.set("2020")
-                packaging = "jar"
-
-                developers {
-                    developer {
-                        id.set("chrisnkrueger")
-                        name.set("Christian Krüger")
-                        email.set("christian.krueger@moviebase.app")
-                    }
-                }
-                licenses {
-                    license {
-                        name.set("The Apache Software License, Version 2.0")
-                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                    }
-                }
-                issueManagement {
-                    system.set("GitHub Issues")
-                    url.set("https://github.com/MoviebaseApp/${project.name}/issues")
-                }
-                scm {
-                    connection.set("scm:git:https://github.com/MoviebaseApp/${project.name}.git")
-                    developerConnection.set("scm:git:git@github.com:MoviebaseApp/${project.name}.git")
+                pom {
+                    name.set("Android Kotlin Extensions")
+                    description.set("Kotlin extensions for Android.")
                     url.set("https://github.com/MoviebaseApp/${project.name}")
+                    inceptionYear.set("2020")
+
+                    developers {
+                        developer {
+                            id.set("chrisnkrueger")
+                            name.set("Christian Krüger")
+                            email.set("christian.krueger@moviebase.app")
+                        }
+                    }
+                    licenses {
+                        license {
+                            name.set("The Apache Software License, Version 2.0")
+                            url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                        }
+                    }
+                    issueManagement {
+                        system.set("GitHub Issues")
+                        url.set("https://github.com/MoviebaseApp/${project.name}/issues")
+                    }
+                    scm {
+                        connection.set("scm:git:https://github.com/MoviebaseApp/${project.name}.git")
+                        developerConnection.set("scm:git:git@github.com:MoviebaseApp/${project.name}.git")
+                        url.set("https://github.com/MoviebaseApp/${project.name}")
+                    }
                 }
             }
         }
