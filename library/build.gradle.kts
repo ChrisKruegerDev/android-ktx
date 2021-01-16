@@ -77,7 +77,6 @@ android {
 }
 
 val sourcesJar by tasks.registering(Jar::class) {
-//    archiveClassifier.set("sources")
     from(android.sourceSets.getByName("main").java.srcDirs)
 }
 
@@ -107,14 +106,13 @@ publishing {
             artifactId = "android-ktx"
             version = "$version_major.$version_minor.$version_patch"
             artifact(sourcesJar)
-            artifact("$buildDir/outputs/aar/library-release.aar")
 
             pom {
                 name.set("Android Kotlin Extensions")
                 description.set("Kotlin extensions for Android.")
                 url.set("https://github.com/MoviebaseApp/${project.name}")
                 inceptionYear.set("2020")
-                packaging = "aar"
+                packaging = "jar"
 
                 developers {
                     developer {
