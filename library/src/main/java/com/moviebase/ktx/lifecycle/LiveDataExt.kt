@@ -20,7 +20,7 @@ fun <T> MutableLiveData<T>.updateValue(newValue: T) {
 
 fun <T> LiveData<T>.bind(owner: LifecycleOwner, onChange: (T) -> Unit) {
     val lifecycleOwner = if (owner is Fragment) owner.viewLifecycleOwner else owner
-    observe(lifecycleOwner, Observer { onChange(it) })
+    observe(lifecycleOwner, { onChange(it) })
 }
 
 fun <T> LiveData<T>.bindNotNull(owner: LifecycleOwner, onChange: (T) -> Unit) =

@@ -11,6 +11,5 @@ fun Toolbar.setOnMenuItemClick(@MenuRes menuRes: Int, onMenuItemClick: (Int) -> 
     setOnMenuItemClickListener { onMenuItemClick(it.itemId); true }
 }
 
-
 fun Toolbar.setupWithNavController(navController: NavController) =
         NavigationUI.setupWithNavController(this, navController)

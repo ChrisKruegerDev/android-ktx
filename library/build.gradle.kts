@@ -75,9 +75,9 @@ val sourcesJar by tasks.registering(Jar::class) {
     from(android.sourceSets.getByName("main").java.srcDirs)
 }
 
-artifacts {
-    add("archives", sourcesJar)
-}
+//artifacts {
+//    add("archives", sourcesJar)
+//}
 
 afterEvaluate {
     publishing {

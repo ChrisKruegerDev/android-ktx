@@ -1,20 +1,20 @@
-# Placebox KTX
-[ ![Download](https://api.bintray.com/packages/placebox/maven/placebox-ktx/images/download.svg?version=1.0.5) ](https://bintray.com/placebox/maven/placebox-ktx/1.0.5/link)
+# Android Kotlin Extensions
+[ ![Download](https://api.bintray.com/packages/moviebase/maven/android-ktx/images/download.svg?version=1.2.1) ](https://bintray.com/moviebase/maven/android-ktx/1.2.1/link)
 
-Placebox KTX is a library with Kotlin extensions.
+This project has additional kotlin extensions for Android.
 
 ## Downoad
 Use gradle for download the latest version:
 
 ```
 repositories {
-  maven { url  "https://dl.bintray.com/placebox/maven" }
+  maven { url  "https://dl.bintray.com/moviebase/maven" }
 }
 
 dependencies {
-  implementation 'com.placebox:placebox-ktx:1.0.5'
+  implementation 'com.moviebase:android-ktx:1.2.1'
 }
 ```
 
 ## License
-Placebox KTX is published under the Apache 2.0 license.
+Android Kotlin Extensions is published under the Apache 2.0 license.
