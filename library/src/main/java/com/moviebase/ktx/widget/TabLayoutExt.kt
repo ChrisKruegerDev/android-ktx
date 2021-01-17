@@ -6,9 +6,10 @@ import androidx.annotation.DimenRes
 import androidx.core.view.postDelayed
 import com.google.android.material.tabs.TabLayout
 
-fun TabLayout.addNewTab(title: String, tag: Any? = null) {
+fun TabLayout.addNewTab(title: String, tag: Any? = null): TabLayout.Tab {
     val tab = newTab().setText(title).setTag(tag)
     addTab(tab)
+    return tab
 }
 
 fun TabLayout.addTabs(@ArrayRes arrayTitles: Int) {

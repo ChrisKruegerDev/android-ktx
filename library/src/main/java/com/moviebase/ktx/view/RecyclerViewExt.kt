@@ -4,6 +4,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.moviebase.ktx.content.toPx
 
+fun RecyclerView.setPaddingSidesPx(px: Int) {
+    setPadding(px, paddingTop, px, paddingBottom)
+}
+
 fun RecyclerView.setPaddingTop(dp: Int) {
     val px = if (dp == 0) 0 else dp.toPx(context)
     setPaddingTopPx(px)
