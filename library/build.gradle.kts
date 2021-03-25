@@ -3,6 +3,8 @@ plugins {
     kotlin("android")
     id("de.mannodermaus.android-junit5")
     id("maven-publish")
+    id("org.jetbrains.dokka")
+    signing
 }
 
 repositories {
@@ -125,12 +127,12 @@ afterEvaluate {
                     }
                     issueManagement {
                         system.set("GitHub Issues")
-                        url.set("https://github.com/MoviebaseApp/${project.name}/issues")
+                        url.set("https://github.com/MoviebaseApp/android-ktx/issues")
                     }
                     scm {
-                        connection.set("scm:git:https://github.com/MoviebaseApp/${project.name}.git")
-                        developerConnection.set("scm:git:git@github.com:MoviebaseApp/${project.name}.git")
-                        url.set("https://github.com/MoviebaseApp/${project.name}")
+                        connection.set("scm:git:https://github.com/MoviebaseApp/android-ktx.git")
+                        developerConnection.set("scm:git:git@github.com:MoviebaseApp/android-ktx.git")
+                        url.set("https://github.com/MoviebaseApp/android-ktx")
                     }
                 }
             }

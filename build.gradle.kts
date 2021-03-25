@@ -1,3 +1,8 @@
+plugins {
+    id("io.codearte.nexus-staging") version "0.30.0"
+//    id("com.github.ben-manes.versions") version "0.38.0"
+}
+
 buildscript {
     val kotlin_version: String by extra
     repositories {
@@ -12,6 +17,14 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
         classpath("de.mannodermaus.gradle.plugins:android-junit5:1.7.0.0")
     }
+}
+
+
+nexusStaging {
+    packageGroup = "app.moviebase"
+    stagingProfileId = findProperty("SONATYPE_STAGING_PROFILE_ID") as String?
+    username = findProperty("SONATYPE_USER") as String?
+    password = findProperty("SONATYPE_PASSWORD") as String?
 }
 
 allprojects {
