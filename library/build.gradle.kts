@@ -3,28 +3,16 @@ plugins {
     kotlin("android")
     id("de.mannodermaus.android-junit5")
     id("maven-publish")
-    id("org.jetbrains.dokka")
     signing
+    id("org.jetbrains.dokka")
 }
 
-repositories {
-    gradlePluginPortal()
-    google()
-    jcenter()
-    mavenCentral()
-}
-
-val version_major: String by project
-val version_minor: String by project
-val version_patch: String by project
-val kotlin_version: String by project
-
-group = "com.moviebase"
-version = "$version_major.$version_minor.$version_patch"
+group = "app.moviebase"
+version = Versions.versionName
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlin_version")
+    implementation(Libs.Kotlin.kotlin)
+    implementation(Libs.Kotlin.kotlinReflect)
     implementation("androidx.core:core-ktx:1.3.2")
     implementation("androidx.preference:preference-ktx:1.1.1")
     implementation("androidx.work:work-runtime-ktx:2.5.0-rc01")
@@ -40,13 +28,13 @@ dependencies {
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdkVersion(Versions.compileSdk)
     buildToolsVersion = "30.0.2"
     defaultConfig {
-        minSdkVersion(23)
-        targetSdkVersion(30)
-        versionCode = version_major.toInt() * 1000 + version_minor.toInt() * 100 + version_patch.toInt() * 10
-        versionName = "$version_major.$version_minor.$version_patch"
+        minSdkVersion(Versions.minSdk)
+        targetSdkVersion(Versions.targetSdk)
+        versionCode = Versions.versionCode
+        versionName = Versions.versionName
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -72,45 +60,55 @@ android {
     }
 }
 
+tasks.withType<Test>().configureEach {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+        showStandardStreams = true
+    }
+}
+
+
 val sourcesJar by tasks.registering(Jar::class) {
     archiveClassifier.set("sources")
     from(android.sourceSets.getByName("main").java.srcDirs)
 }
 
-//artifacts {
-//    add("archives", sourcesJar)
-//}
+artifacts {
+    add("archives", sourcesJar)
+}
 
 afterEvaluate {
     publishing {
-        //    https://github.com/gradle/gradle/issues/11412#issuecomment-555413327
-        System.setProperty("org.gradle.internal.publish.checksums.insecure", "true")
-
         repositories {
             maven {
-                name = "bintray"
-                setUrl("https://api.bintray.com/maven/moviebase/maven/android-ktx/;publish=1;override=1")
+                name = "sonatype"
+                if(Versions.versionName.endsWith("-SNAPSHOT"))
+                    setUrl("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+                else
+                    setUrl("https://s01.oss.sonatype.org/service/local/")
 
                 credentials {
-                    username = findProperty("BINTRAY_USER") as String?
-                    password = findProperty("BINTRAY_API_KEY") as String?
+                    username = findProperty("SONATYPE_USER") as String?
+                    password = findProperty("SONATYPE_PASSWORD") as String?
                 }
             }
         }
 
         publications {
             create<MavenPublication>("mavenJava") {
-                groupId = "com.moviebase"
+                groupId = "app.moviebase"
                 artifactId = "android-ktx"
-                version = "$version_major.$version_minor.$version_patch"
+                version = Versions.versionName
+
                 artifact(sourcesJar)
                 from(components.getByName("release"))
 
                 pom {
                     name.set("Android Kotlin Extensions")
                     description.set("Kotlin extensions for Android.")
-                    url.set("https://github.com/MoviebaseApp/${project.name}")
-                    inceptionYear.set("2020")
+                    url.set("https://github.com/MoviebaseApp/android-ktx")
+                    inceptionYear.set("2021")
 
                     developers {
                         developer {
@@ -138,12 +136,11 @@ afterEvaluate {
             }
         }
     }
+
+    signing {
+        sign(publishing.publications)
+    }
+
 }
 
-tasks.withType<Test>().configureEach {
-    useJUnitPlatform()
-    testLogging {
-        events("passed", "skipped", "failed")
-        showStandardStreams = true
-    }
-}
+

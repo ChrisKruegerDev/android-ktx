@@ -7,12 +7,8 @@ This project has additional kotlin extensions for Android.
 Use gradle for download the latest version:
 
 ```
-repositories {
-  maven { url  "https://dl.bintray.com/moviebase/maven" }
-}
-
 dependencies {
-  implementation 'com.moviebase:android-ktx:1.2.1'
+  implementation 'app.moviebase:android-ktx:1.3.0'
 }
 ```
 
