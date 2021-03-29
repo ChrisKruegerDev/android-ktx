@@ -11,6 +11,12 @@ object Versions {
     val compileSdk = 30
     val buildTools = "30.0.2"
 
+    // Plugins
+    val androidGradle = "4.1.3"
+    val androidJunit = "1.7.1.1"
+    val dokka = "1.4.30"
+    val nexus = "1.0.0"
+
     // Kotlin
     val kotlin = "1.4.31"
     val coroutines = "1.4.3"
@@ -22,12 +28,14 @@ object Versions {
 
     // AndroidX
     val appCompat = "1.2.0"
+    val coreKtx = "1.3.2"
     val constraintLayout = "2.1.0-alpha2"
     val lifecycle = "2.2.0"
     val preference = "1.1.1"
-    val navigation = "2.3.3"
+    val navigation = "2.3.4"
     val recyclerView = "1.2.0-beta01"
     val swipeRefreshLayout = "1.1.0"
+    val viewPager2 = "1.1.0-alpha01"
 
     // Google
     val material = "1.3.0"
@@ -41,10 +49,15 @@ object Versions {
 
     // Testing
     val junitJupiter = "5.7.0"
+    val truth = "1.1.2"
 
 }
 
 object Libs {
+
+    val androidGradle = "com.android.tools.build:gradle:${Versions.androidGradle}"
+    val androidJunit = "de.mannodermaus.gradle.plugins:android-junit5:${Versions.androidJunit}"
+    val dokka = "org.jetbrains.dokka:dokka-gradle-plugin:${Versions.dokka}"
 
     object Kotlin {
         val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
@@ -68,7 +81,7 @@ object Libs {
         val preference = "androidx.preference:preference:${Versions.preference}"
         val preferenceKtx = "androidx.preference:preference-ktx:${Versions.preference}"
         val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
-        val coreKtx = "androidx.core:core-ktx:1.3.1"
+        val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
         val paging = "androidx.paging:paging-runtime:2.1.2"
         val pagingKtx = "androidx.paging:paging-runtime-ktx:2.1.2"
         val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.0-rc02"
@@ -80,7 +93,7 @@ object Libs {
         val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
         val navigationFragment = "androidx.navigation:navigation-fragment:${Versions.navigation}"
         val navigationUi = "androidx.navigation:navigation-ui:${Versions.navigation}"
-        val viewPager2 = "androidx.viewpager2:viewpager2:1.1.0-alpha01"
+        val viewPager2 = "androidx.viewpager2:viewpager2:${Versions.viewPager2}"
         val collection = "androidx.collection:collection:1.1.0"
         val work = "androidx.work:work-runtime-ktx:2.5.0"
         val workMultiprocess = "androidx.work:work-multiprocess:2.5.0"
@@ -139,7 +152,7 @@ object Libs {
 
     object Testing {
         val coroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
-        val truth = "com.google.truth:truth:1.1.2"
+        val truth = "com.google.truth:truth:${Versions.truth}"
         val junit = "junit:junit:4.13.2"
         val jupiter = "org.junit.jupiter:junit-jupiter-api:${Versions.junitJupiter}"
         val jupiterEngine = "org.junit.jupiter:junit-jupiter-engine:${Versions.junitJupiter}"

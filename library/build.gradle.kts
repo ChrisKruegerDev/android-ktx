@@ -13,23 +13,26 @@ version = Versions.versionName
 dependencies {
     implementation(Libs.Kotlin.kotlin)
     implementation(Libs.Kotlin.kotlinReflect)
-    implementation("androidx.core:core-ktx:1.3.2")
-    implementation("androidx.preference:preference-ktx:1.1.1")
-    implementation("androidx.work:work-runtime-ktx:2.5.0-rc01")
-    implementation("androidx.recyclerview:recyclerview:1.1.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
-    implementation("androidx.navigation:navigation-ui-ktx:2.3.2")
-    implementation("androidx.viewpager2:viewpager2:1.0.0")
-    implementation("com.google.android.material:material:1.3.0-rc01")
-    testImplementation("com.google.truth:truth:1.1")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
-    testImplementation("org.mockito:mockito-inline:3.7.0")
+
+    implementation(Libs.AndroidX.coreKtx)
+    implementation(Libs.AndroidX.preferenceKtx)
+    implementation(Libs.AndroidX.work)
+    implementation(Libs.AndroidX.recyclerView)
+    implementation(Libs.AndroidX.constraintLayout)
+    implementation(Libs.AndroidX.navigationUi)
+    implementation(Libs.AndroidX.viewPager2)
+
+    implementation(Libs.Google.material)
+
+    testImplementation(Libs.Testing.truth)
+    testImplementation(Libs.Testing.jupiter)
+    testRuntimeOnly(Libs.Testing.jupiterEngine)
+    testImplementation(Libs.Testing.mockito)
 }
 
 android {
     compileSdkVersion(Versions.compileSdk)
-    buildToolsVersion = "30.0.2"
+    buildToolsVersion = Versions.buildTools
     defaultConfig {
         minSdkVersion(Versions.minSdk)
         targetSdkVersion(Versions.targetSdk)
@@ -94,7 +97,6 @@ afterEvaluate {
                 }
             }
         }
-
         publications {
             create<MavenPublication>("mavenJava") {
                 groupId = "app.moviebase"
@@ -136,11 +138,7 @@ afterEvaluate {
             }
         }
     }
-
     signing {
         sign(publishing.publications)
     }
-
 }
-
-

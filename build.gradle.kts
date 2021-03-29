@@ -1,5 +1,5 @@
 plugins {
-    id("io.github.gradle-nexus.publish-plugin") version "1.0.0"
+    id("io.github.gradle-nexus.publish-plugin") version Versions.nexus
 }
 
 buildscript {
@@ -10,10 +10,9 @@ buildscript {
     }
     dependencies {
         classpath(kotlin("gradle-plugin", Versions.kotlin))
-        classpath("com.android.tools.build:gradle:4.1.3")
-        classpath("de.mannodermaus.gradle.plugins:android-junit5:1.7.1.1")
-        classpath("com.vanniktech:gradle-maven-publish-plugin:0.14.2")
-        classpath("org.jetbrains.dokka:dokka-gradle-plugin:1.4.30")
+        classpath(Libs.androidGradle)
+        classpath(Libs.androidJunit)
+        classpath(Libs.dokka)
     }
 }
 
