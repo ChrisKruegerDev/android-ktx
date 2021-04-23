@@ -1,6 +1,7 @@
 package app.moviebase.ktx.view
 
 import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.VectorDrawable
 import android.view.Menu
 import android.view.MenuItem
 import androidx.annotation.ColorInt
@@ -21,7 +22,10 @@ fun Menu.tint(@ColorInt color: Int) {
 }
 
 fun MenuItem.tint(@ColorInt color: Int) {
-    (icon as? GradientDrawable)?.setColor(color)
+    when(val icon = icon) {
+        is GradientDrawable -> icon.setColor(color)
+        is VectorDrawable -> icon.setTint(color)
+    }
 }
 
 fun MenuItem.updateEnabled(enabled: Boolean) {

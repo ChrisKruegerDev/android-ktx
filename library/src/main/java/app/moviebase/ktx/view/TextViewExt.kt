@@ -11,6 +11,10 @@ fun TextView.setDrawableEnd(resId: Int?) {
     setCompoundDrawablesWithIntrinsicBounds(0, 0, resId ?: 0, 0)
 }
 
+fun TextView.setDrawableStart(resId: Int?) {
+    setCompoundDrawablesWithIntrinsicBounds(resId ?: 0, 0,  0, 0)
+}
+
 fun TextView.updateText(value: CharSequence?) {
     if (text?.toString() == value?.toString()) return
     text = value

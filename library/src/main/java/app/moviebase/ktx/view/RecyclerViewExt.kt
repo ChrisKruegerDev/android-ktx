@@ -36,3 +36,4 @@ var RecyclerView.pool: RecyclerView.RecycledViewPool
 fun RecyclerView.Adapter<*>.unregisterObserverIfAvailable(observer: RecyclerView.AdapterDataObserver) {
     if (hasObservers()) unregisterAdapterDataObserver(observer)
 }
+
