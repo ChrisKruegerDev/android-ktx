@@ -1,16 +1,25 @@
-# Android Kotlin Extensions
-[ ![Download](https://api.bintray.com/packages/moviebase/maven/android-ktx/images/download.svg?version=1.2.1) ](https://bintray.com/moviebase/maven/android-ktx/1.2.1/link)
+[![Maven Central](https://img.shields.io/maven-central/v/app.moviebase/android-ktx?label=Maven%20Central)](https://search.maven.org/artifact/app.moviebase/android-ktx)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.5.0-blue.svg?logo=kotlin)](http://kotlinlang.org)
+[![Gradle](https://img.shields.io/badge/Gradle-7-blue?style=flat)](https://gradle.org)
+[![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
+# Android Kotlin Extensions
 This project has additional kotlin extensions for Android.
 
-## Downoad
-Use gradle for download the latest version:
+## Adding to your project
 
-```
-dependencies {
-  implementation 'app.moviebase:android-ktx:1.3.0'
+The library is published to Maven Central. Add the Maven Central repository if it is not already there.
+
+```kotlin
+repositories {
+    mavenCentral()
 }
 ```
 
-## License
-Android Kotlin Extensions is published under the Apache 2.0 license.
+To use the library in a single-platform project, add a dependency.
+
+```kotlin
+dependencies {
+    implementation("app.moviebase:android-ktx:1.3.4")
+}
+```
