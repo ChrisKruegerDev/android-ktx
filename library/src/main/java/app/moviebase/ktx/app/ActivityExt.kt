@@ -32,6 +32,11 @@ fun Activity.makeSceneTransitionAnimation(view: View): Bundle? {
 
 val Activity.view: View? get() = findViewById(android.R.id.content)
 
+fun Activity.requireView() = requireNotNull(view) {
+    "Main view is not available for: $this"
+}
+
+
 fun Activity.shareIntentChooser(uri: String, title: String?): Boolean = try {
     ShareCompat.IntentBuilder.from(this)
         .setText(uri)

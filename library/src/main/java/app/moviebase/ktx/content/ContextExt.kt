@@ -42,6 +42,9 @@ val Context.isOnline: Boolean
                 || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
     }
 
+val Context.isOffline: Boolean
+    get() = !isOnline
+
 @Suppress("DEPRECATION")
 val Context.locale: Locale
     get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
