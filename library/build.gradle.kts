@@ -1,10 +1,12 @@
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+
 plugins {
     id("com.android.library")
     kotlin("android")
-    id("de.mannodermaus.android-junit5")
     id("maven-publish")
     signing
     id("org.jetbrains.dokka")
+    id("com.github.ben-manes.versions") version "0.39.0"
 }
 
 group = "app.moviebase"
@@ -12,6 +14,7 @@ version = Versions.versionName
 
 dependencies {
     implementation(Libs.Kotlin.kotlin)
+    implementation(Libs.Kotlin.coroutines)
     implementation(Libs.Kotlin.kotlinReflect)
 
     implementation(Libs.AndroidX.coreKtx)
@@ -31,35 +34,37 @@ dependencies {
 }
 
 android {
-    compileSdkVersion(Versions.compileSdk)
-    buildToolsVersion = Versions.buildTools
+    compileSdk = Versions.compileSdk
+
     defaultConfig {
-        minSdkVersion(Versions.minSdk)
-        targetSdkVersion(Versions.targetSdk)
-        versionCode = Versions.versionCode
-        versionName = Versions.versionName
+        minSdk = Versions.minSdk
+        targetSdk = Versions.targetSdk
+//        versionCode = Versions.versionCode
+//        versionName = Versions.versionName
     }
+
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    dexOptions {
-        preDexLibraries = true
-        javaMaxHeapSize = "12g"
-    }
+
     testOptions {
-        unitTests.isReturnDefaultValues = true
         animationsDisabled = true
-        unitTests.isIncludeAndroidResources = true
+        unitTests {
+            isReturnDefaultValues = true
+            isIncludeAndroidResources = true
+        }
     }
-    lintOptions {
+
+    lint {
         isIgnoreTestSources = true
         isWarningsAsErrors = true
         isCheckDependencies = true
-        isAbortOnError = false
     }
 }
 
@@ -141,4 +146,17 @@ afterEvaluate {
     signing {
         sign(publishing.publications)
     }
+}
+
+tasks.withType<DependencyUpdatesTask> {
+    rejectVersionIf {
+        isNonStable(candidate.version)
+    }
+}
+
+fun isNonStable(version: String): Boolean {
+    val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.toUpperCase().contains(it) }
+    val regex = "^[0-9,.v-]+(-r)?$".toRegex()
+    val isStable = stableKeyword || regex.matches(version)
+    return isStable.not()
 }
