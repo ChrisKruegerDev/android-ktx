@@ -18,12 +18,6 @@ suspend fun scopeLaunch(
     block: suspend CoroutineScope.() -> Unit
 ) = coroutineScope { launch(block = block) }
 
-suspend fun <T> Deferred<T?>.awaitOrNull(): T? = try {
-    await()
-} catch (t: Throwable) {
-    null
-}
-
 suspend fun <T> awaitRetry(
     times: Int = DEFAULT_TIMES,
     initialDelay: Long = INITIAL_DELAY,
