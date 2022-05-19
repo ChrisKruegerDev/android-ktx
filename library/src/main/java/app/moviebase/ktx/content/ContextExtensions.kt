@@ -7,12 +7,14 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.graphics.Color
 import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.IBinder
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.*
 import androidx.core.content.ContextCompat
@@ -44,6 +46,12 @@ val Context.isOnline: Boolean
 
 val Context.isOffline: Boolean
     get() = !isOnline
+
+val Context.isNightMode: Boolean
+    get() = resources.configuration.uiMode == Configuration.UI_MODE_NIGHT_YES
+
+val Context.isLightMode: Boolean
+    get() = resources.configuration.uiMode == Configuration.UI_MODE_NIGHT_NO
 
 @Suppress("DEPRECATION")
 val Context.locale: Locale
@@ -102,6 +110,9 @@ val Context.isInstallFromUpdate: Boolean
     get() = firstInstallTime != lastUpdateTime
 
 fun Context.hideKeyboard(windowToken: IBinder) = inputManager.hideSoftInputFromWindow(windowToken, 0)
+
+fun Context.showKeyboard(view: View) = inputManager.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+fun Context.forceShowKeyboard(view: View) = inputManager.toggleSoftInputFromWindow(view.windowToken, InputMethodManager.SHOW_FORCED, 0)
 
 fun Context.hasPermission(permission: String) =
     ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED

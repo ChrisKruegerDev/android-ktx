@@ -8,6 +8,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 
+fun <T> MutableLiveData<List<T>>?.isNullOrEmpty(): Boolean = this?.value.isNullOrEmpty()
+fun <T> MutableLiveData<List<T>>?.isNotNullOrEmpty(): Boolean = !isNullOrEmpty()
+
 fun <T> LiveData<T?>.requireValue(): T = value ?: throw NullPointerException("value is not available")
 
 fun <T> MutableLiveData<T>.trigger() {

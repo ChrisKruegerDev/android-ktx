@@ -50,6 +50,9 @@ fun Spannable.withBold() = withStyle(Typeface.BOLD)
 fun Spannable.withStyle(style: Int) = setExclusiveSpan(StyleSpan(style))
 fun Spannable.withColor(@ColorInt color: Int) = setExclusiveSpan(ForegroundColorSpan(color))
 fun Spannable.withBackgroundColor(@ColorInt color: Int) = setExclusiveSpan(BackgroundColorSpan(color))
+fun Spannable.withStrikethrough() = apply {
+    setSpan(StrikethroughSpan(), 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+}
 
 private fun Spannable.setExclusiveSpan(what: Any) = apply {
     setSpan(what, 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)

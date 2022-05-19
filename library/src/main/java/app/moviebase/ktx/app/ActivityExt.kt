@@ -8,9 +8,12 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.DrawableRes
+import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.app.ShareCompat
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import app.moviebase.ktx.content.preferences
 import kotlin.reflect.KClass
 
@@ -35,7 +38,6 @@ val Activity.view: View? get() = findViewById(android.R.id.content)
 fun Activity.requireView() = requireNotNull(view) {
     "Main view is not available for: $this"
 }
-
 
 fun Activity.shareIntentChooser(uri: String, title: String?): Boolean = try {
     ShareCompat.IntentBuilder.from(this)
@@ -79,3 +81,14 @@ fun AppCompatActivity.setToolbarIcon(@DrawableRes resId: Int) =
             it.setHomeAsUpIndicator(resId)
             it.setDisplayHomeAsUpEnabled(true)
         }
+
+/**
+ * When creating the NavHostFragment using FragmentContainerView or
+ * if manually adding the NavHostFragment to your activity via a FragmentTransaction,
+ * attempting to retrieve the NavController in onCreate() of an Activity via Navigation.findNavController(Activity, @IdRes int) will fail.
+ * You should retrieve the NavController directly from the NavHostFragment instead.
+ */
+fun AppCompatActivity.findNavControllerByFragment(@IdRes fragmentId: Int): NavController {
+    val navHostFragment = supportFragmentManager.findFragmentById(fragmentId) as NavHostFragment
+    return navHostFragment.navController
+}

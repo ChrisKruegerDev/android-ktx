@@ -60,6 +60,7 @@ object Libs {
         val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
         val coreKtx = "androidx.core:core-ktx:${Versions.core}"
         val navigationUi = "androidx.navigation:navigation-ui:${Versions.navigation}"
+        val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
         val viewPager2 = "androidx.viewpager2:viewpager2:${Versions.viewPager2}"
         val collection = "androidx.collection:collection:${Versions.collection}"
         val work = "androidx.work:work-runtime-ktx:${Versions.work}"

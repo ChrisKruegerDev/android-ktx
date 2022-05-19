@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.annotation.IdRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import app.moviebase.ktx.content.hideKeyboard
+import app.moviebase.ktx.content.showKeyboard
 import kotlin.reflect.KClass
 
 
@@ -21,6 +22,8 @@ tailrec fun <T : View> View.findParentOf(clazz: KClass<T>): T? {
 }
 
 fun View.hideKeyboard() = context.hideKeyboard(windowToken)
+
+fun View.showKeyboard() = context.showKeyboard(this)
 
 fun View.updateEnabled(enable: Boolean, alphaValue: Double = .4) {
     isEnabled = enable
