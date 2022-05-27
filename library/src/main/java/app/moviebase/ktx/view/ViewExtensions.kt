@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IdRes
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.*
 import app.moviebase.ktx.content.hideKeyboard
 import app.moviebase.ktx.content.showKeyboard
 import kotlin.reflect.KClass
@@ -47,3 +48,33 @@ var View.marginTopValue
             this.layoutParams = it
         }
     }
+
+/**
+ * Only update margin if it has changed. This avoid moving the FAB.
+ */
+fun View.updateBottomMargin(value: Int) {
+    if (marginBottom != value)
+        updateLayoutParams<ViewGroup.MarginLayoutParams> {
+            bottomMargin = value
+        }
+}
+
+fun View.updateTopMargin(value: Int) {
+    if (marginTop != value)
+        updateLayoutParams<ViewGroup.MarginLayoutParams> {
+            topMargin = value
+        }
+}
+
+
+fun View.updateSideMargin(value: Int) {
+    if (marginRight != value && marginLeft != value)
+        updateLayoutParams<ViewGroup.MarginLayoutParams> {
+            rightMargin = value
+            leftMargin = value
+        }
+}
+
+fun View.updateHeight(value: Int) = updateLayoutParams {
+    height = value
+}
