@@ -1,7 +1,7 @@
 object Versions {
     val versionMajor = 1
     val versionMinor = 4
-    val versionPatch = 0
+    val versionPatch = 1
 
     val versionCode = versionMajor * 1000 + versionMinor * 100 + versionPatch * 10
     val versionName = "$versionMajor.$versionMinor.$versionPatch"
@@ -18,26 +18,26 @@ object Versions {
     val nexus = "1.0.0"
 
     // Kotlin
-    val kotlin = "1.6.10"
-    val coroutines = "1.5.2"
+    val kotlin = "1.6.21"
+    val coroutines = "1.6.1"
 
     // AndroidX
     val core = "1.7.0"
-    val constraintLayout = "2.1.2"
-    val preference = "1.1.1"
-    val navigation = "2.3.5"
+    val constraintLayout = "2.1.3"
+    val preference = "1.2.0"
+    val navigation = "2.4.2"
     val recyclerView = "1.2.1"
     val viewPager2 = "1.1.0-alpha01"
     val work = "2.7.1"
     val collection = "1.1.0"
 
     // Google
-    val material = "1.4.0"
+    val material = "1.6.0"
 
     // Testing
     val junitJupiter = "5.8.2"
     val truth = "1.1.3"
-    val mockito = "4.2.0"
+    val mockitoInline = "4.5.1"
 }
 
 object Plugins {
@@ -74,6 +74,6 @@ object Libs {
         val truth = "com.google.truth:truth:${Versions.truth}"
         val jupiter = "org.junit.jupiter:junit-jupiter-api:${Versions.junitJupiter}"
         val jupiterEngine = "org.junit.jupiter:junit-jupiter-engine:${Versions.junitJupiter}"
-        val mockito = "org.mockito:mockito-inline:${Versions.mockito}"
+        val mockito = "org.mockito:mockito-inline:${Versions.mockitoInline}"
     }
 }

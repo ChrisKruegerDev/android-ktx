@@ -6,7 +6,7 @@ plugins {
     id("maven-publish")
     signing
     id("org.jetbrains.dokka")
-    id("com.github.ben-manes.versions") version "0.39.0"
+    id("com.github.ben-manes.versions") version "0.42.0"
 }
 
 group = "app.moviebase"
@@ -23,6 +23,7 @@ dependencies {
     implementation(Libs.AndroidX.recyclerView)
     implementation(Libs.AndroidX.constraintLayout)
     implementation(Libs.AndroidX.navigationUi)
+    implementation(Libs.AndroidX.navigationFragment)
     implementation(Libs.AndroidX.viewPager2)
 
     implementation(Libs.Google.material)
@@ -39,8 +40,6 @@ android {
     defaultConfig {
         minSdk = Versions.minSdk
         targetSdk = Versions.targetSdk
-//        versionCode = Versions.versionCode
-//        versionName = Versions.versionName
     }
 
     compileOptions {
@@ -115,7 +114,7 @@ afterEvaluate {
                     name.set("Android Kotlin Extensions")
                     description.set("Kotlin extensions for Android.")
                     url.set("https://github.com/MoviebaseApp/android-ktx")
-                    inceptionYear.set("2021")
+                    inceptionYear.set("2022")
 
                     developers {
                         developer {
