@@ -5,11 +5,20 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import app.moviebase.ktx.type.isNullOrFalse
 import app.moviebase.ktx.type.isTrue
 
 val LiveData<Boolean>.booleanValue: Boolean
     get() = value.isTrue()
+
+fun MutableLiveData<Boolean>.switch() {
+    value = !value.isTrue()
+}
+
+fun MutableLiveData<Boolean>.bindEnable(owner: LifecycleOwner, view: View) {
+    observe(owner) { view.isEnabled = it.isTrue() }
+}
 
 fun LiveData<Boolean>.bindVisible(owner: LifecycleOwner, view: View) =
     bind(owner) { view.isVisible = it.isTrue() }
