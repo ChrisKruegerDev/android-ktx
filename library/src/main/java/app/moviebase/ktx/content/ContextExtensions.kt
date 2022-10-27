@@ -60,6 +60,12 @@ val Context.locale: Locale
     else
         resources.configuration.locale
 
+val Context.isLandscape
+    get() = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+
+val Context.isTablet
+    get() = (resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE
+
 fun Context.dimensionPixelSize(@DimenRes id: Int) = resources.getDimensionPixelSize(id)
 fun Context.dimension(@DimenRes id: Int) = resources.getDimension(id)
 fun Context.integer(@IntegerRes id: Int) = resources.getInteger(id)
