@@ -18,7 +18,7 @@ object Versions {
     val nexus = "1.0.0"
 
     // Kotlin
-    val kotlin = "1.6.21"
+    val kotlin = "1.7.20"
     val coroutines = "1.6.1"
 
     // AndroidX
